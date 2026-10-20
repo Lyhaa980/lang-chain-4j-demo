@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: lang-chain-4j-demo
+  data:
+    redis:
+      port: 6379
+      host: localhost
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/volunteer?serverTimezone=Asia/Shanghai&useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&tinyInt1isBit=false&allowPublicKeyRetrieval=true&allowMultiQueries=true&useServerPrepStmts=false
+    username: root
+    password: 123456
+langchain4j:
+  open-ai:
+    # 非流式模型：@AiService 注解里 chatModel = "openAiChatModel" 点名要它
+    chat-model:
+      api-key: ${QWEN_API_KEY}
+      base-url: "https://maas.qianwenaiapi.com/compatible-mode/v1"
+      log-requests: true
+      log-responses: true
+      model-name: qwen3.8-max
+    # 流式模型：Flux<String> 返回值用它，bean 名自动为 openAiStreamingChatModel
+    streaming-chat-model:
+      api-key: ${QWEN_API_KEY}
+      base-url: "https://maas.qianwenaiapi.com/compatible-mode/v1"
+      log-requests: true
+      log-responses: true
+      model-name: qwen3.8-max
+  community:
+    # 向量数据库
+    redis:
+      port: 6379
+      host: localhost
+      dimension: 384
+server:
+  port: 8082
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
